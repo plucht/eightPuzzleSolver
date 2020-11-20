@@ -1,21 +1,25 @@
 package puzzle
 
 class MoveLeft {
-    val disabledCells: Array<Int>
+    private val EMPTY_CELL_VALUE = 0
+
+    private val barrierCells: Array<Int>
         get() {
             return arrayOf(0, 3, 6)
         }
 
     fun move(currentState: Array<Int>): Array<Int> {
-        val emptyCellIndex = currentState.indexOf(0)
+        val indexOfEmptyCell = currentState.indexOf(EMPTY_CELL_VALUE)
 
-        if (disabledCells.contains(emptyCellIndex)) return currentState
+        return when (indexOfEmptyCell) {
+            in barrierCells -> currentState
+            else -> fun (): Array<Int> {
+                val nextState = currentState.clone()
+                nextState[indexOfEmptyCell - 1] = currentState[indexOfEmptyCell]
+                nextState[indexOfEmptyCell] = currentState[indexOfEmptyCell - 1]
 
-        val nextState = currentState.clone()
-
-        nextState.set(emptyCellIndex - 1, currentState.get(emptyCellIndex))
-        nextState.set(emptyCellIndex, currentState.get(emptyCellIndex - 1))
-
-        return nextState
+                return nextState
+            }()
+        }
     }
 }
