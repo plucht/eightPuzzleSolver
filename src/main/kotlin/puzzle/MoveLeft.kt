@@ -13,7 +13,7 @@ class MoveLeft {
 
         return when (indexOfEmptyCell) {
             in barrierCells -> currentState
-            else -> fun (): Array<Int> {
+            else -> fun(): Array<Int> {
                 val nextState = currentState.clone()
                 nextState[indexOfEmptyCell - 1] = currentState[indexOfEmptyCell]
                 nextState[indexOfEmptyCell] = currentState[indexOfEmptyCell - 1]
