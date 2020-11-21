@@ -6,7 +6,7 @@ class StateGenerator(private val strategies: Array<MoveStrategy>) {
     fun generate(currentState: Array<Int>): Array<Int> {
         var nextState = currentState.clone()
         for (strategy in strategies.filter { it -> isMovePossible(it, currentState) }) {
-            nextState = strategy.move(currentState)
+            nextState = strategy.move(currentState, currentState.indexOf(EMPTY_CELL_VALUE))
         }
 
         return nextState
