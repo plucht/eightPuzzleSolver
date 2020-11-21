@@ -10,8 +10,4 @@ internal class MoveLeftTest {
     @Test fun testMoveEmptyCellLeft() {
         assertArrayEquals(EMPTY_CELL_IS_LEFT, MoveLeft().move(EMPTY_CELL_IS_CENTERED))
     }
-
-    @Test fun testDoNothingWhenEmptyCellIsFarLeft() {
-        assertArrayEquals(EMPTY_CELL_IS_LEFT, MoveLeft().move(EMPTY_CELL_IS_LEFT))
-    }
 }
