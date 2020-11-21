@@ -3,10 +3,7 @@ package puzzle
 class MoveLeft: MoveStrategy {
     private val EMPTY_CELL_VALUE = 0
 
-    override val barrierCells: Array<Int>
-        get() {
-            return arrayOf(0, 3, 6)
-        }
+    override val barrierCells = arrayOf(0, 3, 6)
 
     override fun move(currentState: Array<Int>): Array<Int> {
         val indexOfEmptyCell = currentState.indexOf(EMPTY_CELL_VALUE)
