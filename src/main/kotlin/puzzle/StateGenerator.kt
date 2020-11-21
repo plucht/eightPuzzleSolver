@@ -1,5 +1,7 @@
 package puzzle
 
+import puzzle.moves.MoveStrategy
+
 class StateGenerator(private val strategies: Array<MoveStrategy>) {
     private val EMPTY_CELL_VALUE = 0
 

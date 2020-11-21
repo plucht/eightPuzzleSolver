@@ -1,4 +1,4 @@
-package puzzle
+package puzzle.moves
 
 interface MoveStrategy {
     val barrierCells: Array<Int>

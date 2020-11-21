@@ -1,6 +1,6 @@
-package puzzle
+package puzzle.moves
 
-class MoveRight: MoveStrategy {
+class RightMove: MoveStrategy {
     override val barrierCells = arrayOf(2, 5, 8)
 
     override fun move(currentState: Array<Int>, indexOfEmptyCell: Int): Array<Int> {
