@@ -1,6 +1,6 @@
 package puzzle.moves
 
-class DownMove: MoveStrategy {
+class DownMove : MoveStrategy {
     override val barrierCells = arrayOf(6, 7, 8)
 
     override fun move(currentState: Array<Int>, indexOfEmptyCell: Int): Array<Int> {

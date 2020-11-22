@@ -11,12 +11,14 @@ internal class HeuristicSearchSolverTest {
             7, 8, 0
     )
 
-    @Test fun itTerminatesIfTheInitialNodeIsTheTarget() {
+    @Test
+    fun itTerminatesIfTheInitialNodeIsTheTarget() {
         val solution = HeuristicSearchSolver(ManhattanDistance()).solve(targetState, targetState)
         Assert.assertArrayEquals(targetState, solution.state)
     }
 
-    @Test fun itFindsTheTargetOneMoveAway() {
+    @Test
+    fun itFindsTheTargetOneMoveAway() {
         val initial = arrayOf(
                 1, 2, 3,
                 4, 5, 6,
@@ -27,7 +29,8 @@ internal class HeuristicSearchSolverTest {
         Assert.assertArrayEquals(targetState, solution.state)
     }
 
-    @Test fun itFindsTheTargetTwoMovesAway() {
+    @Test
+    fun itFindsTheTargetTwoMovesAway() {
         val initial = arrayOf(
                 1, 2, 3,
                 4, 5, 6,

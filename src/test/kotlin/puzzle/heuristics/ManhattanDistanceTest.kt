@@ -4,7 +4,8 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 internal class ManhattanDistanceTest {
-    @Test fun testEstimateCosts() {
+    @Test
+    fun testEstimateCosts() {
         val initialState = arrayOf(
                 1, 2, 3,
                 4, 5, 6,
@@ -18,7 +19,8 @@ internal class ManhattanDistanceTest {
         assertEquals(1, ManhattanDistance().estimateCosts(initialState, targetState))
     }
 
-    @Test fun testEstimateHigherCosts() {
+    @Test
+    fun testEstimateHigherCosts() {
         val initialState = arrayOf(
                 1, 2, 3,
                 4, 5, 6,
