@@ -1,4 +1,4 @@
-package puzzle
+package puzzle.state
 
 import org.junit.Assert.assertArrayEquals
 import puzzle.moves.DownMove
@@ -36,7 +36,7 @@ internal class StateGeneratorTest {
     }
 
     @Test fun testDoNotMoveUpWhenEmptyCellInTopRow() {
-        assertSame(0,StateGenerator(arrayOf(UpMove())).generate(EMPTY_CELL_IN_TOP_ROW).size)
+        assertSame(0, StateGenerator(arrayOf(UpMove())).generate(EMPTY_CELL_IN_TOP_ROW).size)
     }
 
     @Test fun testMoveEmptyCellDown() {
@@ -44,6 +44,6 @@ internal class StateGeneratorTest {
     }
 
     @Test fun testDoNotMoveDownWhenEmptyCellInBottomRow() {
-        assertSame(0,StateGenerator(arrayOf(DownMove())).generate(EMPTY_CELL_IN_BOTTOM_ROW).size)
+        assertSame(0, StateGenerator(arrayOf(DownMove())).generate(EMPTY_CELL_IN_BOTTOM_ROW).size)
     }
 }

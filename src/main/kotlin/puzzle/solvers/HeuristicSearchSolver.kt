@@ -1,6 +1,6 @@
 package puzzle.solvers
 
-import puzzle.StateGenerator
+import puzzle.state.StateGenerator
 import puzzle.heuristics.DistanceHeuristic
 import puzzle.moves.DownMove
 import puzzle.moves.LeftMove
