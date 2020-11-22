@@ -1,13 +1,23 @@
 package puzzle
 
-import puzzle.heuristics.ManhattanDistance
-import puzzle.solvers.HeuristicSearchSolver
+import puzzle.solvers.Solver
 import puzzle.state.Node
-import java.util.*
 
 fun main(args: Array<String>) {
     println("Please enter initial state")
+    val initialState = readInitialState()
 
+    val solutionPathRenderer = AppFactory().createSolutionPathRenderer()
+    val solver = AppFactory().createHeuristicSearchSolver()
+    try {
+        val targetNode = findTargetNode(initialState, solver)
+        solutionPathRenderer.renderSolutionPath(targetNode)
+    } catch (e: Exception) {
+        println("No solution found. :see_no_evil:")
+    }
+}
+
+private fun readInitialState(): Array<Int> {
     val initialState = mutableListOf<Int>()
     for (i in 1..3) {
         initialState.addAll(readLine()!!.split(" ")
@@ -16,16 +26,10 @@ fun main(args: Array<String>) {
         )
     }
 
-    try {
-        val targetNode = findTargetNode(initialState.toTypedArray())
-        renderSolutionPath(targetNode)
-    } catch (e: Exception) {
-        println("No solution found. :see_no_evil:")
-    }
+    return initialState.toTypedArray()
 }
 
-private fun findTargetNode(initialState: Array<Int>): Node {
-    val solver = HeuristicSearchSolver(ManhattanDistance())
+private fun findTargetNode(initialState: Array<Int>, solver: Solver): Node {
     val targetState = arrayOf(
             1, 2, 3,
             4, 5, 6,
@@ -33,31 +37,4 @@ private fun findTargetNode(initialState: Array<Int>): Node {
     )
 
     return solver.solve(initialState, targetState)
-}
-
-fun renderState(state: Array<Int>, description: String) {
-    println(description)
-    println("" + state[0] + " " + state[1] + " " + state[2])
-    println("" + state[3] + " " + state[4] + " " + state[5])
-    println("" + state[6] + " " + state[7] + " " + state[8])
-}
-
-fun buildSolutionPath(node: Node): Stack<Node> {
-    val solutionPath = Stack<Node>()
-    solutionPath.push(node)
-
-    while (solutionPath.peek().parent != null) {
-        solutionPath.push(solutionPath.peek().parent)
-    }
-
-    return solutionPath
-}
-
-fun renderSolutionPath(targetNode: Node) {
-    val solutionPath = buildSolutionPath(targetNode)
-
-    while (solutionPath.isNotEmpty()) {
-        val currentNode = solutionPath.pop()
-        renderState(currentNode.state, "Next state:")
-    }
 }
