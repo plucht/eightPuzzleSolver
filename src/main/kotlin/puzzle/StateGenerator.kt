@@ -5,13 +5,13 @@ import puzzle.moves.MoveStrategy
 class StateGenerator(private val strategies: Array<MoveStrategy>) {
     private val EMPTY_CELL_VALUE = 0
 
-    fun generate(currentState: Array<Int>): Array<Int> {
-        var nextState = currentState.clone()
+    fun generate(currentState: Array<Int>): List<Array<Int>> {
+        val states = mutableListOf<Array<Int>>()
         for (strategy in strategies.filter { it -> isMovePossible(it, currentState) }) {
-            nextState = strategy.move(currentState, currentState.indexOf(EMPTY_CELL_VALUE))
+            states.add(strategy.move(currentState.clone(), currentState.indexOf(EMPTY_CELL_VALUE)))
         }
 
-        return nextState
+        return states
     }
 
     private fun isMovePossible(action: MoveStrategy, currentState: Array<Int>): Boolean {
