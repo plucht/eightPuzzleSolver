@@ -6,12 +6,9 @@ class StateGenerator(private val strategies: Array<MoveStrategy>) {
     private val EMPTY_CELL_VALUE = 0
 
     fun generate(currentState: Array<Int>): List<Array<Int>> {
-        val states = mutableListOf<Array<Int>>()
-        for (strategy in strategies.filter { it -> isMovePossible(it, currentState) }) {
-            states.add(strategy.move(currentState.clone(), currentState.indexOf(EMPTY_CELL_VALUE)))
-        }
-
-        return states
+        return strategies
+                .filter { it -> isMovePossible(it, currentState) }
+                .map { it -> it.move(currentState.clone(), currentState.indexOf(EMPTY_CELL_VALUE)) }
     }
 
     private fun isMovePossible(action: MoveStrategy, currentState: Array<Int>): Boolean {
