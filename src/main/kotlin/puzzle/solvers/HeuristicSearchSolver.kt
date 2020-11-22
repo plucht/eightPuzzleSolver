@@ -13,13 +13,13 @@ import kotlin.collections.HashSet
 class HeuristicSearchSolver(private val heuristic: DistanceHeuristic) : Solver {
     override fun solve(initialState: Array<Int>, targetState: Array<Int>): Node {
         if (isTargetState(initialState, targetState)) {
-            return Node(initialState, 0)
+            return Node(initialState, null, 0)
         }
 
         val stateGenerator = StateGenerator(arrayOf(UpMove(), DownMove(), LeftMove(), RightMove()))
         val closedList = HashSet<Node>()
         val openList = PriorityQueue<Node>()
-        openList.add(Node(initialState, heuristic.estimateCosts(initialState, targetState)))
+        openList.add(Node(initialState, null, heuristic.estimateCosts(initialState, targetState)))
 
         while (openList.isNotEmpty()) {
             val currentNode = openList.poll()
@@ -31,7 +31,7 @@ class HeuristicSearchSolver(private val heuristic: DistanceHeuristic) : Solver {
 
             val generatedNodes = stateGenerator
                     .generate(currentNode.state)
-                    .map { it -> Node(it, heuristic.estimateCosts(it, targetState)) }
+                    .map { it -> Node(it, currentNode, heuristic.estimateCosts(it, targetState)) }
             val unexploredNodes = generatedNodes
                     .filter { it -> !openList.contains(it) && !closedList.contains(it) }
 
