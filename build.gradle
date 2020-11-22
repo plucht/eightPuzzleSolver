@@ -14,4 +14,8 @@ dependencies {
     testImplementation 'org.jetbrains.kotlin:kotlin-test-junit'
 }
 
+run {
+    standardInput = System.in
+}
+
 mainClassName = 'puzzle.AppKt'
