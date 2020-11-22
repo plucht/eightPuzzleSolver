@@ -6,12 +6,9 @@ class ManhattanDistance : DistanceHeuristic {
     private val EMPTY_CELL_VALUE = 0
 
     override fun estimateCosts(currentState: Array<Int>, targetState: Array<Int>): Int {
-        var totalCosts = 0
-        for (field in currentState) {
-            totalCosts += distanceToTargetFieldPosition(currentState, targetState, field)
-        }
-
-        return totalCosts
+        return currentState
+                .map { field -> distanceToTargetFieldPosition(currentState, targetState, field) }
+                .sum()
     }
 
     private fun distanceToTargetFieldPosition(currentState: Array<Int>, targetState: Array<Int>, fieldIndex: Int): Int {
