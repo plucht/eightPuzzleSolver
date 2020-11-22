@@ -1,7 +1,7 @@
 package puzzle.solvers
 
 import org.junit.Assert
-import puzzle.heuristics.ManhattanDistance
+import puzzle.AppFactory
 import kotlin.test.Test
 
 internal class HeuristicSearchSolverTest {
@@ -13,31 +13,31 @@ internal class HeuristicSearchSolverTest {
 
     @Test
     fun itTerminatesIfTheInitialNodeIsTheTarget() {
-        val solution = HeuristicSearchSolver(ManhattanDistance()).solve(targetState, targetState)
+        val solution = AppFactory().createHeuristicSearchSolver().solve(targetState, targetState)
         Assert.assertArrayEquals(targetState, solution.state)
     }
 
     @Test
     fun itFindsTheTargetOneMoveAway() {
-        val initial = arrayOf(
+        val initialState = arrayOf(
                 1, 2, 3,
                 4, 5, 6,
                 7, 0, 8
         )
 
-        val solution = HeuristicSearchSolver(ManhattanDistance()).solve(initial, targetState)
+        val solution = AppFactory().createHeuristicSearchSolver().solve(initialState, targetState)
         Assert.assertArrayEquals(targetState, solution.state)
     }
 
     @Test
     fun itFindsTheTargetTwoMovesAway() {
-        val initial = arrayOf(
+        val initialState = arrayOf(
                 1, 2, 3,
                 4, 5, 6,
                 0, 7, 8
         )
 
-        val solution = HeuristicSearchSolver(ManhattanDistance()).solve(initial, targetState)
+        val solution = AppFactory().createHeuristicSearchSolver().solve(initialState, targetState)
         Assert.assertArrayEquals(targetState, solution.state)
     }
 }

@@ -2,21 +2,18 @@ package puzzle.solvers
 
 import puzzle.state.StateGenerator
 import puzzle.heuristics.DistanceHeuristic
-import puzzle.moves.DownMove
-import puzzle.moves.LeftMove
-import puzzle.moves.RightMove
-import puzzle.moves.UpMove
+import puzzle.moves.MoveStrategy
 import puzzle.state.Node
 import java.util.*
 import kotlin.collections.HashSet
 
-class HeuristicSearchSolver(private val heuristic: DistanceHeuristic) : Solver {
+class HeuristicSearchSolver(private val heuristic: DistanceHeuristic, private val moves: Array<MoveStrategy>) : Solver {
     override fun solve(initialState: Array<Int>, targetState: Array<Int>): Node {
         if (isTargetState(initialState, targetState)) {
             return Node(initialState, null, 0)
         }
 
-        val stateGenerator = StateGenerator(arrayOf(UpMove(), DownMove(), LeftMove(), RightMove()))
+        val stateGenerator = StateGenerator(moves)
         val closedList = HashSet<Node>()
         val openList = PriorityQueue<Node>()
         openList.add(Node(initialState, null, heuristic.estimateCosts(initialState, targetState)))
